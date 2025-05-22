@@ -1,3 +1,5 @@
+import debugLog from "./debugLog";
+
 /**
  * Cleans up a Swift forum URL by removing the last path segment for the post number.
  * For example, converts:
@@ -25,4 +27,15 @@ export function getThreadUrlWithoutPostNumber(originalUrl: string): string {
     }
 
     return url.toString();
+}
+
+/**
+ * Replaces the current URL in the browser's history with a cleaned-up URL version without the post number
+ */
+export function replaceHrefWithThreadUrlWithoutPostNumber() {
+    const threadUrl = getThreadUrlWithoutPostNumber(location.href)
+    if (location.href != threadUrl) {
+        debugLog(`Replacing URL: ${location.href} with ${threadUrl}`);
+        history.replaceState(null, "", threadUrl);
+    }
 }
