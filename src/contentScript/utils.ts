@@ -30,12 +30,23 @@ export function getThreadUrlWithoutPostNumber(originalUrl: string): string {
 }
 
 /**
- * Replaces the current URL in the browser's history with a cleaned-up URL version without the post number
+ * Replaces the current URL in the browser's history with a cleaned-up URL version without the post number.
+ * Will only execute if the feature is enabled.
  */
 export function replaceHrefWithThreadUrlWithoutPostNumber() {
-    const threadUrl = getThreadUrlWithoutPostNumber(location.href)
-    if (location.href != threadUrl) {
-        debugLog(`Replacing URL: ${location.href} with ${threadUrl}`);
-        history.replaceState(null, "", threadUrl);
-    }
+    chrome.storage.local.get('featureEnabled', (data) => {
+        if (data.featureEnabled === undefined) {
+            chrome.storage.local.set({ featureEnabled: true });
+            data.featureEnabled = true;
+        } else if (data.featureEnabled === false) {
+            debugLog("Feature is disabled");
+            return;
+        } else {
+            const threadUrl = getThreadUrlWithoutPostNumber(location.href)
+            if (location.href != threadUrl) {
+                debugLog(`Replacing URL: ${location.href} with ${threadUrl}`);
+                history.replaceState(null, "", threadUrl);
+            }
+        }
+    });
 }

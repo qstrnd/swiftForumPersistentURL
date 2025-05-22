@@ -1,13 +1,29 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/icon/logo.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chrome Extension + Vanilla + TS + Vite</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/popup/index.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/icon/logo.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="module" src="/src/popup/index.ts"></script>
+  <title>Chrome Extension + Vanilla + TS + Vite</title>
+</head>
+
+<body>
+  <div class="custom-toggle-wrapper">
+    <div class="form-check form-switch custom-switch">
+      <input class="form-check-input" type="checkbox" id="toggleSetting">
+      <label class="form-check-label" for="toggleSetting">Remove post suffix</label>
+    </div>
+    <p class="caption">
+      URLs like<br>
+      <code>https://forums.swift.org/t/thread/941/1</code><br>
+      will become<br>
+      <code>https://forums.swift.org/t/thread/941</code>
+      to allow URL-based extensions (e.g. bookmarks, highlighters) to work properly.
+    </p>
+  </div>
+</body>
+
 </html>

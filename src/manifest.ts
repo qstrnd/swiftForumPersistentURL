@@ -27,7 +27,7 @@ export default defineManifest({
   },
   content_scripts: [
     {
-      matches: ['https://forums.swift.org/t/*'],
+      matches: ['http://*/*', 'https://*/*'],
       js: ['src/contentScript/index.ts'],
     },
   ],
