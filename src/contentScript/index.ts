@@ -1,1 +1,3 @@
-console.info('contentScript is running')
+import timerObserver from "./timerObserver";
+
+timerObserver.run();
